@@ -30,16 +30,16 @@ public class MensagemController {
     @PutMapping("/api/usuarios/{id}")
     @CrossOrigin(origins = "*")
     public Usuario editar(@PathVariable Long id, @RequestBody Usuario dadosNovos) {
-        // 1. Achamos o usuário atual no banco
+        // usuário atual banco
         Usuario usuarioDoBanco = repository.findById(id).get();
 
-        // 2. Atualizamos o nome com o que veio do site
+        // 
         usuarioDoBanco.setNome(dadosNovos.getNome());
 
-        // 3. Geramos o e-mail novo baseado no nome editado
+        // Gerador de email
         usuarioDoBanco.setEmail(dadosNovos.getNome().toLowerCase().replace(" ", "") + "@ads2026.com");
 
-        // 4. Salvamos de volta no MySQL
+        // salva no mysql
         return repository.save(usuarioDoBanco);
     }
 }
